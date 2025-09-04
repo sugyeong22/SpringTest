@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>변수와 조건문</title>
+</head>
+<body>
+    <h3>01</h3>
+    <th:block th:with="num1 = 36, num2= 3">
+        <h4>첫번째 숫자 : <span th:text="${num1}"></span></h4>
+        <h4>두번째 숫자 : <span th:text="${num2}"></span></h4>
+    </th:block>
+
+    <h3>02</h3>
+    <div th:with="num1= 36, num2 = 3">
+        <h4>더하기 : <span th:text="${num1+num2}"></span></h4>
+        <h4>빼기 : <span th:text = "${num1 - num2}"></span></h4>
+        <h4>곱하기 : <sapn th:text = "${num1 * num2}"></sapn></h4>
+        <h4>나누기 : <span th: text = > </span></h4>
+    </div>
+</body>
+</html>
