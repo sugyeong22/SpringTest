@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>기상청</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/thymeleaf/totalTest/style.css">
+</head>
+<body>
+    <div id="wrap">
+        <header class="header col-3 bg-info " >
+            <div class="d-flex justify-content-center align-items-center">
+                <img class="logo" alt="로고 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/weather-logo.png">
+                <div class="text-white font-weight-bold"> 기상청 </div>
+            </div>
+        </header>
+
+        <section class="d-flex">
+            <nav class="menu bg-info col-3">
+                <ul class="nav flex-column">
+                    <il class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">날씨</a></il>
+                    <il class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">날씨입력</a></il>
+                    <il class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">테마날씨</a></il>
+                    <il class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">관측기후</a></il>
+                </ul>
+            </nav>
+            <article class="table bg-warning">
+                <h1>과거 날씨</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>날씨</th>
+                            <th>기온</th>
+                            <th>강수량</th>
+                            <th>미세먼지</th>
+                            <th>풍속</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="weather:${weatherList}">
+                            <td th:text="${weaterList.date}">날짜</td>
+                            <td th:text="${weatherList.weather}">날씨</td>
+                            <td th:text="${weatherList.temperatures}">기온</td>
+                            <td th:text="${weatherList.preciptation}">강수량</td>
+                            <td th:text="${weatherList.microDust}">미세먼지</td>
+                            <td th:text="${weatherList.windSpeed}">풍속</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+        <footer></footer>
+    </div>
+</body>
+</html>

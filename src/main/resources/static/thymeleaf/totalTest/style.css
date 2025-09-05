@@ -1,0 +1,22 @@
+#wrap{
+    width:1200px;
+    height: 800px;
+    margin:0 auto;
+    background-color:darkblue;
+}
+
+.header{
+    height:100px;
+}
+
+.logo{
+    height: 50px;
+}
+
+.menu{
+    height:700px;
+}
+
+.table{
+    height:800px;
+}
