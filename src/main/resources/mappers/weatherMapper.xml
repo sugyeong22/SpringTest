@@ -11,7 +11,7 @@
         ,`date`
         ,`weather`
         ,`temperatures`
-        ,`preciptation`
+        ,`precipitation`
         ,`micro_dust`
         ,`wind_speed`
         ,`created_at`
@@ -19,4 +19,43 @@
     FROM
         `weatherhistory`
     </select>
+
+    <insert id="insertWeather" parameterType="map">
+        INSERT INTO `weatherhistory`
+            (`date`
+            ,`weather`
+            ,`temperatures`
+            ,`precipitation`
+            ,`micro_dust`
+            ,`wind_speed`)
+        VALUE
+            (
+                #{date}
+                ,#{weather}
+                ,#{temperatures}
+                ,#{precipitation}
+                ,#{microDust}
+                ,#{windSpeed}
+            )
+    </insert>
+
+    <insert id="insertWeatherByObject"
+            parameterType="com.sudal.springtest.totalTest.domain.weather">
+        INSERT INTO `weatherhistory`
+        (`date`
+        ,`weather`
+        ,`temperatures`
+        ,`precipitation`
+        ,`micro_dust`
+        ,`wind_speed`)
+            VALUE
+            (
+            #{date}
+            ,#{weather}
+            ,#{temperatures}
+            ,#{precipitation}
+            ,#{microDust}
+            ,#{windSpeed}
+            )
+    </insert>
 </mapper>

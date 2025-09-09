@@ -73,7 +73,7 @@ public class TymeleafController {
         member.put("point", 420);
         membership.add(member);
 
-        model.addAttribute("member", membership);
+        model.addAttribute("memberList", membership);
 
         return "/thymeleaf/test03";
     }

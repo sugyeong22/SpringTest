@@ -1,14 +1,17 @@
 package com.sudal.springtest.totalTest.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class weather {
 
     private int id;
-    private String date;
+    @DateTimeFormat(pattern="yyyy년 M월 d일")
+    private LocalDateTime date;
     private String weather;
-    private String temperatures;
-    private String preciptation;
+    private double temperatures;
+    private double precipitation;
     private String microDust;
     private String windSpeed;
     private LocalDateTime createdAt;
@@ -22,11 +25,11 @@ public class weather {
         this.id = id;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -38,20 +41,20 @@ public class weather {
         this.weather = weather;
     }
 
-    public String getTemperatures() {
+    public double getTemperatures() {
         return temperatures;
     }
 
-    public void setTemperatures(String temperatures) {
+    public void setTemperatures(double temperatures) {
         this.temperatures = temperatures;
     }
 
-    public String getPreciptation() {
-        return preciptation;
+    public double getPrecipitation() {
+        return precipitation;
     }
 
-    public void setPreciptation(String preciptation) {
-        this.preciptation = preciptation;
+    public void setPrecipitation(double precipitation) {
+        this.precipitation = precipitation;
     }
 
     public String getMicroDust() {
