@@ -11,4 +11,16 @@
             (#{name}
             ,#{url})
     </insert>
+
+    <select id="selectFavorit"
+            resultType="com.sudal.springtest.ajax.domain.Favorit">
+        SELECT
+            `id`
+            ,`name`
+            ,`url`
+            ,`created_at`
+            ,`updated_at`
+        FROM
+          `favorite`
+    </select>
 </mapper>

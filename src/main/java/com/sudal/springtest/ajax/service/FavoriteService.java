@@ -1,8 +1,11 @@
 package com.sudal.springtest.ajax.service;
 
+import com.sudal.springtest.ajax.domain.Favorit;
 import com.sudal.springtest.ajax.repository.FavoritRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FavoriteService {
@@ -14,5 +17,10 @@ public class FavoriteService {
     public int addfavorit(String name, String url){
         int count = favoritRepository.insertFavorit(name, url);
         return count;
+    }
+
+    public List<Favorit> selectFavorit(){
+        List<Favorit> favoritList= favoritRepository.selectFavorit();
+        return favoritList;
     }
 }

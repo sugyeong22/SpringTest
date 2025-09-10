@@ -35,17 +35,18 @@
                 type: "post"
                 , url: "/ajax/favorit/add"
                 , data :{"name" : name, "url":url}
-                , sucess: function(responce){
-                    if(responce.result == "sucess"){
+                , success: function(){
+                    if(responce.result == "success"){
                         alert("성공");
+                        window.location.href = "/ajax/favorit/info"
                     } else{
-                        alert("사용자 추가 실패");
+                        alert("사용자 추가 실패")
                     }
                 }
                 , error: function(){
-                    alert("사용자 추가 에러");
+                    alert("사용자 추가 에러")
                 }
-            })
+            });
         })
 
 

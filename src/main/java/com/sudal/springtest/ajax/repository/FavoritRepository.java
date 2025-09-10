@@ -1,7 +1,10 @@
 package com.sudal.springtest.ajax.repository;
 
+import com.sudal.springtest.ajax.domain.Favorit;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface FavoritRepository {
@@ -10,4 +13,6 @@ public interface FavoritRepository {
             @Param("name")String name
             , @Param("url")String url
     );
+
+    public List<Favorit> selectFavorit();
 }
