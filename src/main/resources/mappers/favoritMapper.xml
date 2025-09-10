@@ -23,4 +23,15 @@
         FROM
           `favorite`
     </select>
+
+    <select id="duplicateUrl" parameterType="String"
+            resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            `favorite`
+        WHERE
+            `url` = #{url}
+
+    </select>
 </mapper>

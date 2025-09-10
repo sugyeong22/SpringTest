@@ -18,6 +18,21 @@ public class FavoriteController {
     @Autowired
     private FavoriteService favoriteService;
 
+    // 중복확인 API
+    @ResponseBody
+    @GetMapping("/duplicate-url")
+    public Map<String,Boolean> isDuplicateUrl(@RequestParam("url") String url){
+        // 중복확인
+        // 넘길 값 만들기
+        Map<String,Boolean> duplicateMap = new HashMap<>();
+
+        if(favoriteService.isDuplicateUrl(url)){
+            duplicateMap.put("duplicate",true);
+        } else{
+            duplicateMap.put("duplicate",false);
+        }
+        return duplicateMap;
+    }
 
     // 즐거찾기 추가 API
     @ResponseBody

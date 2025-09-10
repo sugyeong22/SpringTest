@@ -10,12 +10,52 @@
     <div class="container center">
         <h2>즐겨찾기 추가하기</h2>
         <label>제목</label><input type="text" class="form-control" id="nameInput"> <br>
-        <label>주소</label><input type="text" class="form-control" id="urlInput"> <br>
-        <button type="button" class="form-control  btn-success" id="button">추가</button>
+        <label>주소</label>
+        <div class="d-flex">
+            <input type="text" class="form-control col-11" id="urlInput">
+            <button type="button" class="btn btn-info ml-1" id="duplicateBtn">중복확인</button><br>
+        </div>
+        <div class="text-danger small d-none" id="infoMessage">중복된 url 입니다.</div>
+        <button type="button" class="form-control btn-success mt-3" id="button">추가</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        $("#duplicateBtn").on("click",function(){
+            let duplicateBtn = $("#duplicateBtn").val();
+            let url = $("#urlInput").val();
+            let infoMessage = $("#infoMessage").val();
+
+            // 유효성 검사
+            if(url == ""){
+                alert("주소를 입력하세요")
+                return;
+            }
+
+            if(!url.startsWith("http://") && !url.startsWith("http://")){
+                alert("주소 형식이 잘못 되었습니다.");
+                return;
+            }
+
+            $.ajax({
+                type:"get"
+                , url:"/ajax/favorit/duplicate-url"
+                , data : {"url" : url}
+                , success : function (responce){
+                    if(responce.duplicate){
+                        $("#infoMessage").removeClass("d-none");
+                    } else{
+                        alert("사용가능한 이메일 입니다.")
+                    }
+                }
+                , error: function(){
+                    alert("주소 중복확인 에러")
+                }
+            })
+
+
+        })
+
         $("#button").on("click", function(){
             let name = $("#nameInput").val();
             let url = $("#urlInput").val();
@@ -30,21 +70,26 @@
                 return;
             }
 
+            if(!url.startsWith("http://") && !url.startsWith("http://")){
+                alert("주소 형식이 잘못 되었습니다.");
+                return;
+            }
+
             // 입력받은 값을 controller에 넣기
             $.ajax({
                 type: "post"
                 , url: "/ajax/favorit/add"
                 , data :{"name" : name, "url":url}
-                , success: function(){
+                , success: function(responce){
                     if(responce.result == "success"){
                         alert("성공");
-                        window.location.href = "/ajax/favorit/info"
+                        location.href = "/ajax/favorit/info"
                     } else{
-                        alert("사용자 추가 실패")
+                        alert("사용자 추가 실패");
                     }
                 }
                 , error: function(){
-                    alert("사용자 추가 에러")
+                    alert("사용자 추가 에러");
                 }
             });
         })

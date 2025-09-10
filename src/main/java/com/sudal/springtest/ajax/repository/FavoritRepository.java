@@ -3,6 +3,7 @@ package com.sudal.springtest.ajax.repository;
 import com.sudal.springtest.ajax.domain.Favorit;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface FavoritRepository {
     );
 
     public List<Favorit> selectFavorit();
+
+    public int duplicateUrl(@RequestParam("url") String url);
 }

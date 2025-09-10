@@ -23,4 +23,14 @@ public class FavoriteService {
         List<Favorit> favoritList= favoritRepository.selectFavorit();
         return favoritList;
     }
+
+    // 중복 확인 service
+    public Boolean isDuplicateUrl(String url){
+       int count = favoritRepository.duplicateUrl(url);
+       if(count > 0){
+           return true;
+       } else{
+           return false;
+       }
+    }
 }
