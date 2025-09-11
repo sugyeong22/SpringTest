@@ -33,4 +33,11 @@ public class FavoriteService {
            return false;
        }
     }
+
+    // 즐겨찾기 삭제 기능
+    public int deleteFavorit(int id){
+        int count = favoritRepository.deleteFavorite(id);
+
+        return count;
+    }
 }

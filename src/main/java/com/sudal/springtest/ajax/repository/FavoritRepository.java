@@ -17,5 +17,7 @@ public interface FavoritRepository {
 
     public List<Favorit> selectFavorit();
 
-    public int duplicateUrl(@RequestParam("url") String url);
+    public int duplicateUrl(@Param("url") String url);
+
+    public int deleteFavorite(@Param("id") int id);
 }

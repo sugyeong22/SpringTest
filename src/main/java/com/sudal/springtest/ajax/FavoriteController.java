@@ -34,6 +34,27 @@ public class FavoriteController {
         return duplicateMap;
     }
 
+    // 즐겨찾기 삭제 API
+    @ResponseBody
+    @GetMapping("/remove")
+    public Map<String, String> removeFavorit(@RequestParam("id") int id){
+
+        int count = favoriteService.deleteFavorit(id);
+
+        // 성공 : {"result" : "success"}
+        // 실패 : {"result" : "fail"}
+
+        Map<String, String> resultMap = new HashMap<>();
+
+        if(count == 1){
+            resultMap.put("result","success");
+        } else{
+            resultMap.put("result","fail");
+        }
+
+        return resultMap;
+    }
+
     // 즐거찾기 추가 API
     @ResponseBody
     @PostMapping("/add")

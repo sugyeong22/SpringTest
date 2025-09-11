@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>통나무 펜션</title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/ajax/pansion.css">
+</head>
+<body>
+<div id="wrap">
+    <header class="d-flex justify-content-center align-items-center">
+        <div class="display-4">통나무 펜션</div>
+    </header>
+    <nav class="main-menu">
+        <ul class="nav nav-fill font-weight-bold">
+            <li class="nav-item"><a href="#" class="nav-link text-white">펜션소개</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white">객실보기</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white">예약안내</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white">커뮤니티</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <h2>예약 목록 보기</h2>
+            </div>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>예약날짜</th>
+                        <th>숙박일수</th>
+                        <th>숙박인원</th>
+                        <th>전화번호</th>
+                        <th>예약상태</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pension:${pensionList}">
+                        <td th:text="${pension.name}">이름</td>
+                        <td th:text="${pension.date}">예약날짜</td>
+                        <td th:text="${pension.day}">숙박일수</td>
+                        <td th:text="${pension.headCount}">숙박인원</td>
+                        <td th:text="${pension.phoneNumber}">전화번호</td>
+                        <td th:text="${pension.state}">예약상태</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm">삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+</body>
+</html>
