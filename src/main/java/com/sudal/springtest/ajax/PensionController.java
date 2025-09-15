@@ -33,16 +33,16 @@ public class PensionController {
     }
 
     // 예약 추가 API
-    @PostMapping("/add")
-    public addReservation(
-            @RequestParam("name")String name
-            , @RequestParam("dateTime")LocalDateTime dateTime
-            , @RequestParam("day") int day
-            , @RequestParam("headCount") int headCount
-            , @RequestParam("phoneNumber") String phoneNumber
-
-            ){
-
-
-    }
+//    @PostMapping("/add")
+//    public addReservation(
+//            @RequestParam("name")String name
+//            , @RequestParam("dateTime")LocalDateTime dateTime
+//            , @RequestParam("day") int day
+//            , @RequestParam("headCount") int headCount
+//            , @RequestParam("phoneNumber") String phoneNumber
+//
+//            ){
+//
+//
+//    }
 }
