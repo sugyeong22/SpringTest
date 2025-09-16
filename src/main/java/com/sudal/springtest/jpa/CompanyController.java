@@ -42,6 +42,6 @@ public class CompanyController {
     @GetMapping("/remove")
     public String removeCompany(){
         companyService.deleteCompany(14);
-        return "삭제 완료";
+        return "수행 완료";
     }
 }
