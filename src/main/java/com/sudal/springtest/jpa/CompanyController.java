@@ -28,4 +28,20 @@ public class CompanyController {
         companyList.add(company);
         return companyList;
     }
+
+
+    @ResponseBody
+    @GetMapping("/modify")
+    public Company modifyCompany(){
+        Company company = companyService.updateCompany(14, "중소기업", 34);
+
+        return company;
+    }
+
+    @ResponseBody
+    @GetMapping("/remove")
+    public String removeCompany(){
+        companyService.deleteCompany(14);
+        return "삭제 완료";
+    }
 }

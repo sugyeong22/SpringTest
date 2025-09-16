@@ -1,48 +1,117 @@
 package com.sudal.springtest.ajax;
 
-import com.sudal.springtest.ajax.domain.Pension;
-import com.sudal.springtest.ajax.service.PensionService;
+import com.sudal.springtest.ajax.domain.Booking;
+import com.sudal.springtest.ajax.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/ajax/pansion")
 @Controller
 public class PensionController {
 
-    @Autowired
-    private PensionService pensionService;
+    @RequestMapping("/ajax/booking")
+    @Controller
+    public class BookingController {
 
-    @GetMapping("/list")
-    public String pensionList(Model model){
-        List<Pension> pensionList = pensionService.selectPansion();
-        model.addAttribute("pensionList", pensionList);
-        return "ajax/pansionList";
+        @Autowired
+        private BookingService bookingService;
+
+        @GetMapping("/main")
+        public String main() {
+            return "ajax/booking/main";
+        }
+
+        @GetMapping("/list")
+        public String list(Model model) {
+
+            List<Booking> bookingList = bookingService.getBookingList();
+
+            model.addAttribute("bookingList", bookingList);
+
+            return "ajax/booking/list";
+        }
+
+        @GetMapping("/form")
+        public String form() {
+            return "ajax/booking/form";
+        }
+
+        // 예약 삭제 API
+        @ResponseBody
+        @GetMapping("/remove")
+        public Map<String, String> removeBooking(@RequestParam("id") int id) {
+
+            int count = bookingService.deleteBooking(id);
+
+            // 성공 : {"result":"success"}
+            // 실패 : {"result":"fail"}
+            Map<String, String> resultMap = new HashMap<>();
+            if (count == 1) {
+                resultMap.put("result", "success");
+            } else {
+                resultMap.put("result", "fail");
+            }
+
+            return resultMap;
+
+        }
+
+        // 예약 추가 API
+        @ResponseBody
+        @GetMapping("/add")
+        public Map<String, String> addBooking(
+                @RequestParam("name") String name
+                , @RequestParam("headcount") int headcount
+                , @RequestParam("day") int day
+                , @DateTimeFormat(pattern = "yyyy년 M월 d일") @RequestParam("date") LocalDate date  // 2025년 9월 12일
+                , @RequestParam("phoneNumber") String phoneNumber) {
+
+
+            int count = bookingService.createBooking(name, headcount, day, date, phoneNumber);
+
+            // 성공 : {"result":"success"}
+            // 실패 :  {"result":"fail"}
+            Map<String, String> resultMap = new HashMap<>();
+            if (count == 1) {
+                resultMap.put("result", "success");
+            } else {
+                resultMap.put("result", "fail");
+            }
+
+            return resultMap;
+        }
+
+
+        // 이름과 전화번화가 일치하는 예약정보 API
+        @ResponseBody
+        @GetMapping("/search")
+        public Map<String, Object> searchBooking(
+                @RequestParam("name") String name
+                , @RequestParam("phoneNumber") String phoneNumber) {
+            // 일치하는 정보는 하나만 존재한다
+            Booking booking = bookingService.getBooking(name, phoneNumber);
+
+            // 조회결과
+            // 조회 성공 : {"result":"success", "data":{"id": 10,"name": "김인규", "headcount": 2,...}}
+            // 조회 실패 : {"result":"fail"}
+
+            Map<String, Object> resultMap = new HashMap<>();
+
+            if (booking != null) {
+                resultMap.put("result", "success");
+                resultMap.put("data", booking);
+            } else {
+                resultMap.put("result", "fail");
+            }
+            return resultMap;
+        }
     }
-
-    @GetMapping("/form")
-    public String pentionForm(){
-        return "ajax/pansionForm";
-    }
-
-    // 예약 추가 API
-//    @PostMapping("/add")
-//    public addReservation(
-//            @RequestParam("name")String name
-//            , @RequestParam("dateTime")LocalDateTime dateTime
-//            , @RequestParam("day") int day
-//            , @RequestParam("headCount") int headCount
-//            , @RequestParam("phoneNumber") String phoneNumber
-//
-//            ){
-//
-//
-//    }
 }

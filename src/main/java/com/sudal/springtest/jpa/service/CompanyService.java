@@ -5,6 +5,8 @@ import com.sudal.springtest.jpa.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CompanyService {
 
@@ -27,6 +29,31 @@ public class CompanyService {
         Company result = companyRepository.save(company);
 
         return result;
+    }
+
+    public Company updateCompany(int id, String scale, int headCount) {
+        Optional<Company> optionalCompany = companyRepository.findById(id);
+
+        if (optionalCompany.isPresent()) {
+            Company company = optionalCompany.get();
+            company = company.toBuilder().scale(scale).headcount(headCount).build();
+            Company result = companyRepository.save(company);
+
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    public void deleteCompany(int id){
+
+        Optional<Company> optionalCompany = companyRepository.findById(id);
+
+        if(optionalCompany.isPresent()){
+            Company company = optionalCompany.get();
+            companyRepository.delete(company);
+        }
+    }
+
 
     }
-}

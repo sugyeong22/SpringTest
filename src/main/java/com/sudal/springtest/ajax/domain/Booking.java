@@ -2,7 +2,7 @@ package com.sudal.springtest.ajax.domain;
 
 import java.time.LocalDateTime;
 
-public class Pension {
+public class Booking {
 
     private int id;
     private String name;
