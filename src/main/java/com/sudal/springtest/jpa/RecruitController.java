@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/jpa/recruit")
 @Controller
@@ -23,9 +26,7 @@ public class RecruitController {
     @ResponseBody
     @GetMapping("/1")
     public List<Recruit> findRecruit1(){
-        List<Recruit> recruit = null;
-
-        recruit = recruitRepository.findById(8);
+        List<Recruit> recruit = recruitRepository.findById(8);
 
         return recruit;
     }
@@ -34,7 +35,26 @@ public class RecruitController {
     @GetMapping("/2")
     public List<Recruit> findRecruit2(@RequestParam("companyId") int companyId){
 
+        List<Recruit> recruit = recruitRepository.findById(companyId);
+        return recruit;
 
     }
+
+    @ResponseBody
+    @GetMapping("/3")
+    public List<Recruit> findRecruit3(){
+        List<Recruit> recruit = null;
+
+        // recruit = recruitRepository.findByPositionAndType("웹 back-end 개발자", "정규직");
+        // Greater인데 이상값이 안나옴..
+        //recruit = recruitRepository.findByTypeOrSalaryGreaterThan("정규직", 9000);
+        //recruit = recruitRepository.findTop3ByTypeOrderBySalaryDesc("계약직");
+        // recruit = recruitRepository.findBySalaryBetween(7000,8500);
+        recruit = recruitRepository.madeQuery(LocalDate.of(2026,04,10), 8100, "정규직");
+        return recruit;
+    }
+
+
+
 
 }
