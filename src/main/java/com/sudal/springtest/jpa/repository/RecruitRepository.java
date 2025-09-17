@@ -15,14 +15,14 @@ public interface RecruitRepository extends JpaRepository<Recruit, Integer> {
 
     public List<Recruit> findByPositionAndType(String positon, String type);
 
-    public List<Recruit> findByTypeOrSalaryGreaterThan(String type, int salary);
+    public List<Recruit> findByTypeOrSalaryGreaterThanEqual(String type, int salary);
 
     public List<Recruit> findTop3ByTypeOrderBySalaryDesc(String type);
 
-    public List<Recruit> findBySalaryBetween(int salary1, int salary2);
+    public List<Recruit> findByRegionAndSalaryBetween(String region,int salary1, int salary2);
 
     //마감일이 2026-04-10 이후이고 연봉이 8100 이상인 정규직 공고를 연봉 내림차순으로 조회하세요.
     @Query(value = "SELECT * FROM `recruit` WHERE `deadline` > :date AND `salary` >= :salary AND `type` = :type ORDER BY `salary` DESC " , nativeQuery = true)
-    public List<Recruit> madeQuery(@Param("date") LocalDate date, @Param("salary") int salary, @Param("type")String type);
+    public List<Recruit> madeQuery(@Param("date") LocalDateTime date, @Param("salary") int salary, @Param("type")String type);
 
 }
